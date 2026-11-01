@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block heading %}Dashboard{% endblock %}
+{% block content %}
+<div class="welcome"><div><span class="eyebrow light">YOUR CAMPUS AT A GLANCE</span><h2>Good day, Administrator.</h2><p>Manage your students, courses, and academic enrollments in one place.</p></div><div class="welcome-icon">✦</div></div>
+<div class="stats-grid">
+  <article class="stat-card"><div class="stat-top"><span>Total students</span><span class="stat-icon purple">♙</span></div><div class="stat-number">{{ stats.students }}</div><div class="stat-note">Registered in the system</div></article>
+  <article class="stat-card"><div class="stat-top"><span>Active courses</span><span class="stat-icon blue">▤</span></div><div class="stat-number">{{ stats.courses }}</div><div class="stat-note">Available course records</div></article>
+  <article class="stat-card"><div class="stat-top"><span>Enrollments</span><span class="stat-icon green">⇄</span></div><div class="stat-number">{{ stats.enrollments }}</div><div class="stat-note">Student-course registrations</div></article>
+  <article class="stat-card"><div class="stat-top"><span>Departments</span><span class="stat-icon orange">⌂</span></div><div class="stat-number">{{ stats.departments }}</div><div class="stat-note">Represented by students</div></article>
+</div>
+<div class="section-heading"><div><span class="eyebrow">QUICK ACCESS</span><h2>Manage your campus</h2></div></div>
+<div class="quick-grid">
+  <a class="quick-card" href="{{ url_for('add_student') }}"><div class="quick-icon purple">＋</div><div><h3>Add a student</h3><p>Create a student profile and assign a department.</p></div><span class="arrow">↗</span></a>
+  <a class="quick-card" href="{{ url_for('add_course') }}"><div class="quick-icon blue">＋</div><div><h3>Create a course</h3><p>Add a course code, instructor, and credit hours.</p></div><span class="arrow">↗</span></a>
+  <a class="quick-card" href="{{ url_for('enrollments') }}"><div class="quick-icon green">⇄</div><div><h3>Manage enrollments</h3><p>Register students and update academic grades.</p></div><span class="arrow">↗</span></a>
+</div>
+<div class="panel">
+  <div class="panel-heading"><div><span class="eyebrow">LATEST RECORDS</span><h2>Recently added students</h2></div><a class="text-link" href="{{ url_for('students') }}">View all students →</a></div>
+  {% if recent %}<div class="table-wrap"><table><thead><tr><th>Student</th><th>Student ID</th><th>Department</th><th>Semester</th></tr></thead><tbody>{% for s in recent %}<tr><td><div class="person"><span class="person-avatar">{{ s.full_name[:1]|upper }}</span><strong>{{ s.full_name }}</strong></div></td><td><span class="code">{{ s.student_no }}</span></td><td>{{ s.department }}</td><td><span class="pill">Semester {{ s.semester }}</span></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty">No students yet. Add your first student to get started.</div>{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }}{% endblock %}{% block heading %}{{ page_title }}{% endblock %}
+{% block content %}
+<div class="form-layout"><div class="form-aside"><div class="quick-icon purple">♙</div><h2>Student profile</h2><p>Keep student records consistent so they can be enrolled in courses and assigned grades.</p><div class="tip">TIP <p>Student ID and email must be unique.</p></div></div>
+<div class="panel form-panel"><form method="post" class="data-form">
+  <div class="field"><label for="student_no">Student ID</label><input id="student_no" name="student_no" required maxlength="30" placeholder="e.g. STU-1004" value="{{ student.student_no if student else request.form.get('student_no','') }}"></div>
+  <div class="field"><label for="full_name">Full name</label><input id="full_name" name="full_name" required maxlength="100" placeholder="Enter full name" value="{{ student.full_name if student else request.form.get('full_name','') }}"></div>
+  <div class="field"><label for="email">Email address</label><input id="email" type="email" name="email" required maxlength="150" placeholder="student@university.edu" value="{{ student.email if student else request.form.get('email','') }}"></div>
+  <div class="field"><label for="department">Department</label><input id="department" name="department" required maxlength="100" placeholder="e.g. Computer Science" value="{{ student.department if student else request.form.get('department','') }}"></div>
+  <div class="field"><label for="semester">Current semester</label><select id="semester" name="semester" required>{% for n in range(1,13) %}<option value="{{ n }}" {% if (student and student.semester == n) or (not student and request.form.get('semester','1')|int == n) %}selected{% endif %}>Semester {{ n }}</option>{% endfor %}</select></div>
+  <div class="form-actions"><a class="btn secondary" href="{{ url_for('students') }}">Cancel</a><button class="btn primary" type="submit">Save student</button></div>
+</form></div></div>
+{% endblock %}

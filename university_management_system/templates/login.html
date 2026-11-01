@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | CampusFlow</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="login-body">
+  <main class="login-shell">
+    <div class="login-brand"><span class="brand-mark">C</span><span>CampusFlow<small>UNIVERSITY PORTAL</small></span></div>
+    <section class="login-card">
+      <span class="eyebrow">ADMINISTRATOR ACCESS</span>
+      <h1>Welcome back</h1>
+      <p class="login-subtitle">Sign in to manage your campus records.</p>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}<div class="flash-list">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+      {% endwith %}
+      <form method="post" class="login-form">
+        <div class="field"><label for="username">Username</label><input id="username" name="username" required autocomplete="username" autofocus placeholder="Enter username"></div>
+        <div class="field"><label for="password">Password</label><input id="password" type="password" name="password" required autocomplete="current-password" placeholder="Enter password"></div>
+        <button class="btn primary login-submit" type="submit">Sign in →</button>
+      </form>
+      <div class="demo-credentials"><strong>Demo credentials</strong><p>Username: <code>admin</code></p><p>Password: <code>Admin123!</code></p><small>Change the demo password and secret key before deployment.</small></div>
+    </section>
+    <p class="login-footer">CampusFlow · Python + Flask + SQLite</p>
+  </main>
+</body>
+</html>

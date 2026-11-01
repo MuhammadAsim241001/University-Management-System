@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}{% block heading %}About this project{% endblock %}
+{% block content %}
+<div class="about-hero"><span class="brand-mark large">C</span><span class="eyebrow">PORTFOLIO PROJECT</span><h2>CampusFlow</h2><p>A university management system built to demonstrate practical Python web development, relational database design, and CRUD workflows.</p></div>
+<div class="about-grid"><div class="panel"><h2>Technology stack</h2><ul class="feature-list"><li><strong>Python + Flask</strong><span>Web application and routing</span></li><li><strong>SQLite</strong><span>Relational data storage</span></li><li><strong>HTML + Jinja</strong><span>Dynamic templates and forms</span></li><li><strong>CSS</strong><span>Responsive user interface</span></li></ul></div><div class="panel"><h2>What it demonstrates</h2><ul class="feature-list"><li><strong>CRUD operations</strong><span>Create, read, update, and delete</span></li><li><strong>Database relationships</strong><span>Students, courses, and enrollments</span></li><li><strong>Validation</strong><span>Unique IDs, duplicate prevention, grade checks</span></li><li><strong>Search and dashboard</strong><span>Find records and view summary totals</span></li></ul></div></div>
+<div class="notice"><strong>Before production use</strong><p>Add authentication, role permissions, CSRF protection, secure configuration, tests, and data backups before using real student information.</p></div>
+{% endblock %}

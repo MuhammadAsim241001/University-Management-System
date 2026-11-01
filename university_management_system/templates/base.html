@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}CampusFlow{% endblock %} | University Management</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">C</span><span>CampusFlow<small>UNIVERSITY PORTAL</small></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <nav>
+      <a class="{{ 'active' if request.endpoint == 'dashboard' else '' }}" href="{{ url_for('dashboard') }}"><span>▦</span> Dashboard</a>
+      <a class="{{ 'active' if request.endpoint in ['students','add_student','edit_student'] else '' }}" href="{{ url_for('students') }}"><span>♙</span> Students</a>
+      <a class="{{ 'active' if request.endpoint in ['courses','add_course','edit_course'] else '' }}" href="{{ url_for('courses') }}"><span>▤</span> Courses</a>
+      <a class="{{ 'active' if request.endpoint in ['enrollments','update_grade'] else '' }}" href="{{ url_for('enrollments') }}"><span>⇄</span> Enrollments & grades</a>
+    </nav>
+    <div class="sidebar-bottom"><div class="avatar">{{ (session.get('username', 'A')[:1])|upper }}</div><div class="admin-meta"><strong>{{ session.get('username', 'Admin') }}</strong><small>{{ session.get('role', 'admin')|capitalize }}</small></div><form method="post" action="{{ url_for('logout') }}"><button class="logout-button" type="submit" title="Sign out">↪</button></form></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><span class="eyebrow">CAMPUS ADMINISTRATION</span><h1>{% block heading %}Dashboard{% endblock %}</h1></div><a class="top-link" href="{{ url_for('about') }}">About project ↗</a></header>
+    <section class="content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}<div class="flash-list">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+      <footer>CampusFlow <span>·</span> Python + Flask + SQLite <span class="footer-right">Built for learning and portfolio use</span></footer>
+    </section>
+  </main>
+</body>
+</html>
